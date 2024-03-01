@@ -3,9 +3,9 @@ import { pool } from "../db.js";
 export const getTasks = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "SELECT * FROM task ORDER BY createAt ASC"
+      'SELECT * FROM task ORDER BY "created_at" ASC'
     );
-    res.json(result); 
+    res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -14,7 +14,7 @@ export const getTasks = async (req, res) => {
 // Controlador para obtener una tarea por su ID.
 export const getTask = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM task WHERE id = ?", [
+    const [result] = await pool.query("SELECT * FROM task WHERE id = $1", [
       req.params.id,
     ]);
     if (result.length === 0)
@@ -31,7 +31,7 @@ export const createTask = async (req, res) => {
   try {
     const { title, description } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO task (title, description) values(?, ?)",
+      "INSERT INTO task (title, description) values($1, $2) RETURNING id",
       [title, description]
     );
 
@@ -48,10 +48,13 @@ export const createTask = async (req, res) => {
 // Controlador para actualizar una tarea existente por su ID.
 export const updateTask = async (req, res) => {
   try {
-    const [result] = await pool.query("UPDATE task SET ? WHERE id = ?", [
-      req.body,
-      req.params.id,
-    ]);
+    const { title, description } = req.body;
+    const taskId = req.params.id;
+
+    const [result] = await pool.query(
+      "UPDATE task SET title = $1, description = $2 WHERE id = $3 RETURNING *",
+      [title, description, taskId]
+    );
     res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -61,7 +64,7 @@ export const updateTask = async (req, res) => {
 // Controlador para eliminar una tarea por su ID.
 export const deleteTask = async (req, res) => {
   try {
-    const [result] = await pool.query("DELETE FROM task WHERE id = ?", [
+    const [result] = await pool.query("DELETE FROM task WHERE id = $1", [
       req.params.id,
     ]);
     if (result.affectedRows === 0)

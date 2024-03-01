@@ -14,7 +14,7 @@ const TaskCard = ({ task }) => {
   };
 
   // Obtiene la fecha de creación de la tarea y la formatea.
-  const dateString = task.createAt;
+  const dateString = task.created_at;
   const date = new Date(dateString);
 
   // Opciones de formato para la fecha.
