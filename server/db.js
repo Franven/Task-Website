@@ -4,7 +4,7 @@ const { Pool } = pkg;
 
 config()
 
-const config = {
+const configDb = {
   user: process.env.RENDER_USERNAME,
   host: process.env.RENDER_HOSTNAME,
   port: process.env.RENDER_PORT,
@@ -12,6 +12,6 @@ const config = {
   database: process.env.RENDER_DATABASE,
 };
 
-export const pool = new Pool(config);
+export const pool = new Pool(configDb);
 
 
