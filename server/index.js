@@ -23,6 +23,7 @@ app.use(taskRoutes);
 app.use(express.static(join(__dirname,'../client/dist')))
 
 // Inicia el servidor escuchando en el puerto especificado.
+
 app.listen(PORT);
 
 console.log(`server esta corriendo en el puerto ${PORT}`);
