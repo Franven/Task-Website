@@ -1,9 +1,14 @@
-import { Pool } from "pg";
+import pkg from "pg";
+const { Pool } = pkg;
 
-export const pool = new Pool({
-  user: "root",
+const config = {
+  user: "postgres",
   host: "localhost",
-  database: "tasksbd",
+  port: 5433,
   password: "123456",
-  port: 5432,
-});
+  database: "tasksbd",
+};
+
+export const pool = new Pool(config);
+
+// 123456 postgres

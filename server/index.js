@@ -11,7 +11,6 @@ import taskRoutes from "./routes/task.routes.js";
 const app = express();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-console.log(__dirname)
 
 // Configura el middleware 'cors' para permitir solicitudes desde http://localhost:5173 (frontend).
 app.use(cors({ origin: "http://localhost:5173" }));

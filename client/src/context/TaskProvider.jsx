@@ -22,7 +22,6 @@ export const useTask = () => {
 export const TaskContextProvider = ({ children }) => {
   // Estado local para almacenar la lista de tareas.
   const [tasks, setTasks] = useState([]);
-
   // Función para cargar las tareas desde el servidor.
   const loadTask = async () => {
     const response = await getTasksRequest();
@@ -42,7 +41,7 @@ export const TaskContextProvider = ({ children }) => {
   // Función para crear una nueva tarea.
   const createTask = async (task) => {
     try {
-      //Si no tiene título no se crea
+      // Si no tiene título no se crea
       if (task.title === "") {
         throw new Error("La tarea tiene que tener título");
       } else {
@@ -80,13 +79,14 @@ export const TaskContextProvider = ({ children }) => {
       if (!taskFound) {
         throw new Error(`Tarea con ID ${id} no encontrada`);
       }
-      const newDoneValue = taskFound.done === 0 ? 1 : 0;
+      const newDoneValue = !taskFound.done 
 
       await toggleTaskDoneRequest(id, newDoneValue);
+
       const updatedTasks = tasks.map((task) =>
         task.id === id ? { ...task, done: newDoneValue } : task
       );
-      setTasks(updatedTasks);
+      setTasks([...updatedTasks]);
     } catch (error) {
       console.log(error);
     }
