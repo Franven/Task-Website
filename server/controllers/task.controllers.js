@@ -43,6 +43,7 @@ export const createTask = async (req, res) => {
       id: result.insertId,
       title,
       description,
+      created_at: dateIso,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
