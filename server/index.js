@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(indexRoutes);
 app.use(taskRoutes);
 
-app.use(express.static(join(__dirname,'../client/dist')))
+// app.use(express.static(join(__dirname,'../client/dist')))
 
 // Inicia el servidor escuchando en el puerto especificado.
 
