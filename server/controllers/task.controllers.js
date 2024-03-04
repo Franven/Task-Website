@@ -31,9 +31,12 @@ export const getTask = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     const { title, description } = req.body;
+    const date = Date();
+    const dateIso = date.toISOString();
+
     const result = await pool.query(
-      "INSERT INTO task (title, description) values($1, $2) ",
-      [title, description]
+      "INSERT INTO task (title, description, created_at) values($1, $2, $3) ",
+      [title, description, dateIso]
     );
 
     res.json({
