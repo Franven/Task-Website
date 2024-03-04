@@ -9,7 +9,7 @@ import taskRoutes from "./routes/task.routes.js";
 // Importa el framework Express para construir la aplicación web.
 const app = express();
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Configura el middleware 'cors' para permitir solicitudes desde http://localhost:5173 (frontend).
 app.use(cors({ origin: process.env.FRONTEND_URL }));
