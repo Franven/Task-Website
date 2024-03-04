@@ -7,7 +7,7 @@ config()
 
 
 export const pool = new Pool({
-  connectionString: process.env.RENDER_DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
 
 
