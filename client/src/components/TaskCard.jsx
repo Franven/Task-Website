@@ -13,6 +13,7 @@ const TaskCard = ({ task }) => {
     await toggleTaskDone(task.id);
   };
 
+  const newDate = task.created_at.substring(0, 10).split("-").reverse().join();
 
   return (
     // Contenedor principal de la tarjeta de tarea.
@@ -22,7 +23,7 @@ const TaskCard = ({ task }) => {
         <span>{task.done === true ? "✔️" : "✖️"}</span>
       </header>
       <p>{task.description}</p>
-      <span>{task.created_at}</span>
+      <span>{newDate}</span>
       {/* Botones de acción para la tarea (Eliminar, Editar, Cambiar estado). */}
       <div className="flex gap-2 items-end">
         <button
