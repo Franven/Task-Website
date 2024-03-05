@@ -13,7 +13,11 @@ const TaskCard = ({ task }) => {
     await toggleTaskDone(task.id);
   };
 
-  const newDate = task.created_at.substring(0, 10).split("-").reverse().join();
+  const newDate = task.created_at
+    .substring(0, 10)
+    .split("-")
+    .reverse()
+    .join("-");
 
   return (
     // Contenedor principal de la tarjeta de tarea.
